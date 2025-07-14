@@ -20,18 +20,25 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         Button b1=findViewById(R.id.button);
+        b1.setText("PLAY");
         Button b2=findViewById(R.id.button1);
         MediaPlayer mp=MediaPlayer.create(this,R.raw.mysong);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mp.start();
+                if (mp.isPlaying()) {
+                    mp.pause();
+                    b1.setText("PLAY");
+                } else {
+                    mp.start();
+                    b1.setText("PAUSE");
+                }
             }
         });
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mp.pause();
+                mp.stop();
             }
         });
                 ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
